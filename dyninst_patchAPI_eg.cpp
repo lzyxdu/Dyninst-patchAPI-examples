@@ -41,11 +41,11 @@ public:
   // push   %r10
   // mov    $0x400400,%r10
   // mov    %rdi,%rsi
-  // movb   $0x0,0x5(%rsp)    \0
-  // movb   $0xa,0x4(%rsp)    \n
-  // movb   $0x78,0x3(%rsp)   x
-  // movb   $0x25,0x2(%rsp)   %
-  // lea    0x2(%rsp),%rdi
+  // movb   $0x0,-0x2(%rbp)    \0
+  // movb   $0xa,-0x3(%rbp)    \n
+  // movb   $0x78,-0x4(%rbp)   x
+  // movb   $0x25,-0x5(%rbp)   %
+  // lea    -0x5(%rbp),%rdi
   // mov    $0x0,%eax
   // callq  *%r10
   // pop    %r10
@@ -71,11 +71,11 @@ public:
     "\x41\x52"
     "\x49\xc7\xc2\x00\x04\x40\x00"
     "\x48\x89\xfe"
-    "\xc6\x44\x24\x05\x00"
-    "\xc6\x44\x24\x04\x0a"
-    "\xc6\x44\x24\x03\x78"
-    "\xc6\x44\x24\x02\x25"
-    "\x48\x8d\x7c\x24\x02"
+    "\xc6\x45\xfe\x00"
+    "\xc6\x45\xfd\x0a"
+    "\xc6\x45\xfc\x78"
+    "\xc6\x45\xfb\x25"
+    "\x48\x8d\x7d\xfb"
     "\xb8\x00\x00\x00\x00"
     "\x41\xff\xd2"
     "\x41\x5a"
@@ -88,7 +88,7 @@ public:
     "\x5f"
     "\xc9"
     ;
-    for(int i = 0;i<74;i++){
+    for(int i = 0;i<69;i++){
       buffer.push_back(bytes[i]);
     }
     return true;
